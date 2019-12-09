@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body id="body" style="margin: 0px; border: none; overflow: hidden; user-select: none; position: fixed; left: 0px; top: 0px; width: 1920px; height: 947px; background-color: transparent; cursor: default;">
+  <textarea id="log" style="width: 800px; height: 500px; background-color: yellow;">
+  </textarea>
+  <script>
+    var log = document.getElementById("log");
+    function print(event) {
+      var message = event.type;
+      log.innerHTML += (message+" / ");
+    };
+    
+      document.addEventListener('touchstart', print);
+      document.addEventListener('touchend', print);
+      document.addEventListener('touchesCancelled', print);
+      document.addEventListener('touchesEnd', print);
+  </script>
+</body>
+
+</html>
