@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<body style="position: absolute; background-color: yellow; overflow: hidden; border: 0; margin: 0; width: 100%; height: 100%;">
+  <button id="button_01" style="width: 200px; height: 50px;">window.resizeTo(800,500)</button>
+  <div id="div_log"></div>
+  <script>
+    var button_01 = document.getElementById("button_01");
+    var log = document.getElementById("div_log");
+    var resizeAction = false;
+
+    button_01.addEventListener("click", function() {
+      resizeAction = true;
+      window.resizeTo(800, 500);
+    });
+
+    (function(){
+      log.innerText += "open시 window size확인\n"
+      log.innerText += "window.innerWidth:"+window.innerWidth+", window.innerHeight:"+window.innerHeight+"\n";
+      log.innerText += "window.outerWidth:"+window.outerWidth+", window.outerHeight:"+window.outerHeight+"\n";
+    })();
+
+    function resizeCallBackFn (event) {
+      if (resizeAction)
+      {
+        log.innerText += "resizeTo 실행 후 window size\n"
+        log.innerText += "window.innerWidth:"+window.innerWidth+", window.innerHeight:"+window.innerHeight+"\n";
+        log.innerText += "window.outerWidth:"+window.outerWidth+", window.outerHeight:"+window.outerHeight+"\n";
+        resizeAction = false;
+      }
+    };
+
+    if (window.addEventListener) {
+      window.addEventListener("resize", resizeCallBackFn);
+    }
+    else if (window.attachevent) {
+      window.attachevent("onresize", resizeCallBackFn);
+    }
+  </script>
+</body>
+
+</html>
