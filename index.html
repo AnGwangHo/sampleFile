@@ -3,10 +3,38 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Sample IndexPage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        a { 
+            text-decoration: none;
+        }
+        a:visited {
+            color:transparent !important;
+        }
+        li {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <h1>목차 페이지입니다.</h1>
+    <h1>Index</h1>
+    <hr/>
+    <ol>
+        <li>
+            WebView
+            <ul type="disc">
+                <li><a href="./webview/iOS_UIWebView_screenOut.html" target="_blank">iOS UIWebView에서 screen밖으로 slide시 bug동작</a></li>
+            </ul>
+        </li>
+        <li>
+            Window Method
+            <ul type="disc">
+                <li><a href="./window_method/open_main.html" target="_blank">window open()시 브라우저별 크기가 다른 현상</a></li>
+            </ul>
+        </li>
+    </ol>
 </body>
 </html>
