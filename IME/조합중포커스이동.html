@@ -66,7 +66,7 @@
     function input_focusMove_Fn(event) {
       print(event);
       var comp = event.target;
-      if (comp == input1) {
+      if (comp == input1 && input1.value == "고") {
         log.innerHTML += '**************조합 중 이동시작**************\n';
         console.log('******조합 중 이동*******')
         
