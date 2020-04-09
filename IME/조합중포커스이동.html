@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+  <div style="font-weight: bold;">
+    <span style="color: red; text-decoration-line: underline;">1. 아래 첫 번째 input에 "고" 입력</span><br>
+    - "고" 입력 시 두 번쨰 input으로 focus 이동 후 첫 번째 input으로 focus 주는 동작 수행 중(하단 textarea/console창에서 확인 가능)<br>
+    <span style="color: red; text-decoration-line: underline;">2. "고"가 조합완료 되며 "고"뒤에 caret이 존재하는 것을 확인</span><br>
+    <span style="color: red; text-decoration-line: underline;">3. "ㄹ" 입력 시 "고골"이 되는 것을 확인(NG)</span><br>
+    4. 페이지 리로딩 후 2.번까지 진행 후 "ㅜ, ㅠ, ㅗ, ㅛ, ㅡ"와 같이 이전문자에 대하여 조합이 될 수 없는 문자 입력<br>
+    5. 조합 중이던 문자가 복사되지 않는 것을 확인(OK)<br>
+  </div>
+  <input id="input1"
+    name="usrname"
+    value=""
+    style="width:200px; height: 50px;">
+  <input id="input2"
+    name="usrname"
+    value=""
+    style="width:200px; height: 50px;">
+  </div>
+  <div>
+    <textarea id="log"
+      style="width: 1000px; height: 500px;"></textarea>
+  </div>
+  <script>
+    var input1 = document.getElementById('input1');
+    var input2 = document.getElementById('input2');
+    var log = document.getElementById('log');
+    var array = [input1, input2];
+    var compositionupdate = false, composition_data = "", paste_data = "", paste_flag = false;
+
+    function print(event) {
+      console.log(event.target.id + '의 ' + event.type + ', ' + event.target.value + ', ' + event.data + ', ' + event.target.selectionStart + ', ' + event.target.selectionEnd + ', ' + event.keyCode + ', ' + event.shiftKey);
+      log.innerHTML += event.target.id + '의 ' + event.type + '[value:' + event.target.value + ', data:' + event.data + ', start:' + event.target.selectionStart + ', end:' + event.target.selectionEnd + ', keycode:' + event.keyCode + ', inputType:' + event.inputType + "]\n";
+    };
+
+    for (var i = 0; i < array.length; i++) {
+      array[i].addEventListener("input", input_focusMove_Fn);
+      array[i].addEventListener("keypress", print);
+      array[i].addEventListener("keydown", print);
+      array[i].addEventListener("keyup", print);
+      array[i].addEventListener("compositionstart", compositionstart_check_fn);
+      array[i].addEventListener("compositionupdate", compositionupdate_check_fn);
+      array[i].addEventListener("compositionend", compositionend_check_fn);
+      array[i].addEventListener("focus", print);
+      array[i].addEventListener("blur", print);
+    }
+
+    function compositionstart_check_fn(event) {
+      print(event);
+    }
+
+    function compositionupdate_check_fn(event) {
+      compositionupdate = true;
+      composition_data = event.data;
+      print(event);
+    }
+
+    function compositionend_check_fn(event) {
+      compositionupdate = false;
+      var comp = event.target;
+      print(event);
+    }
+
+    function input_focusMove_Fn(event) {
+      print(event);
+      var comp = event.target;
+      if (comp == input1) {
+        log.innerHTML += '**************조합 중 이동시작**************\n';
+        console.log('******조합 중 이동*******')
+        
+        input2.focus();
+        input1.focus();
+        log.innerHTML += '**************조합 중 이동완료**************\n';
+      }
+    }
+  </script>
+</body>
+
+</html>
