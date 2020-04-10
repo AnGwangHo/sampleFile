@@ -1,0 +1,43 @@
+﻿<html>
+  <script>
+    function sleep(ms) {
+      var d1 = new Date().getTime();
+      var d2 = new Date().getTime();
+      while (d2 < d1 + ms) {
+        d2 = new Date().getTime();
+      }
+      return;
+    }
+    function t1() {
+      console.log("onclick");
+      alert("onclick");
+    }
+    function t2() {
+      console.log("mousedown");
+    }
+    function t3() {
+      console.log("mouseup");
+    }
+    function t4() {
+      console.log("mouseenter");
+    }
+    function t5() {
+      console.log("mousemove");
+    }
+  </script>
+
+  <body>
+    Sleep Test <br />
+
+    <input type="button" value="sleep" onclick="sleep(3000)" />
+    <input
+      type="button"
+      value="alert"
+      onclick="t1()"
+      onmousedown="t2()"
+      onmouseup="t3()"
+      onmouseenter="t4()"
+      onmousemove="t5()"
+    />
+  </body>
+</html>
